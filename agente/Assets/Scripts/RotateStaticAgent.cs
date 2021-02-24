@@ -5,14 +5,14 @@ using UnityEngine;
 public class RotateStaticAgent : FunctionsFSM
 {
     //Metodo que se manda llamar cuando se entra al estado de Idle
-    public override void EnterState(AgenteEstatico agent)
+    public override void EnterState(Agente agent)
     {
         Debug.Log("Entro a estado rotar"); //Mensaje en consola de Unity
         agent.agentStatus = AgentState.OnMovement; //Se cambia la variable para indicar el estado en que se encuentra el agente
     }
 
     //Metodo que se manda llamar cada frame
-    public override void UpdateState(AgenteEstatico agent)
+    public override void UpdateState(Agente agent)
     {
         //Si se detecto al agente
         if(agent.targetDetected)

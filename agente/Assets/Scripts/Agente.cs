@@ -9,7 +9,7 @@ using UnityEngine;
 //Los estados en que puede estar el agente
 public enum AgentState {Idle, OnMovement, Attacking, Dead}
 
-public class AgenteEstatico : MonoBehaviour
+public class Agente : MonoBehaviour
 {
     //Una variable para saber el estado del agente
     public AgentState agentStatus;
@@ -30,6 +30,9 @@ public class AgenteEstatico : MonoBehaviour
     public Vector3[] angles;        //Un arreglo de vectores que guarda los angulos que debe pasar el agente
     public int angleIndex;          //Una variable para recorrer el arreglo uno por uno
 
+    //Añadimos nuestro objeto "Bala" a la lista de objetos pre fabricados
+    public GameObject prefabBala;
+    public Transform Canion;
 
     //Declaración de los estados que tendrá el agente para su ejecución
     public readonly IdleStaticState idleState = new IdleStaticState();
@@ -75,6 +78,12 @@ public class AgenteEstatico : MonoBehaviour
     {
         curState = state;
         curState.EnterState(this);
+    }
+
+    //metodo para generar nuestro prefab "Bala" con cada disparo realizado desde nuestro cañon/torreta
+    public void FireBullet()
+    {
+        Instantiate(prefabBala, Canion.position, Canion.rotation);
     }
 
     //Metodo para ejecutar corutinas y nos permitan ejecutar ciertos procesos en un cantidad de tiempo determinada,

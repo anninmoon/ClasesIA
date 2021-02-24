@@ -5,7 +5,7 @@ using UnityEngine;
 public class IdleStaticState : FunctionsFSM
 {
     //Metodo de inicio en el estado Idle
-    public override void EnterState(AgenteEstatico agent)
+    public override void EnterState(Agente agent)
     {
         Debug.Log("Entro a estado Idle");
         agent.agentStatus = AgentState.Idle; //Se cambia la variable para saber el estado en que esta el agente
@@ -13,16 +13,21 @@ public class IdleStaticState : FunctionsFSM
     }
 
     //Corutina, nos permite hacer una "pausa" antes de ejecutar cierto código
-    IEnumerator Wait(AgenteEstatico agent)
+    IEnumerator Wait(Agente agent)
     {
         yield return new WaitForSeconds(agent.timeIdle); //Espera x segundos, depende del valor de la variable timeIdle
         agent.TransitionToState(agent.rotateState); //Cambia al estado de rotación
     }
 
-    public override void UpdateState(AgenteEstatico agent)
+    public override void UpdateState(Agente agent)
     {
         //necesario preguntar si se ha detectado al jugador
-            //agent.StopAllCoroutines();//Esto detiene la corutina de Wait que esta en este código
-            //Si es verdad, cambiar al estado de atacar
+        //agent.StopAllCoroutines();//Esto detiene la corutina de Wait que esta en este código
+        //Si es verdad, cambiar al estado de atacar
+        if (agent.targetDetected)
+        {
+            agent.StopAllCoroutines();
+            agent.TransitionToState(agent.attackState);
+        }
     }
 }
