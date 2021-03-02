@@ -8,12 +8,12 @@ public class Bala : MonoBehaviour
     //Public es para que el codigo sea visible
     //Float es la marca de que es una variable
     //5.0F es la velocidad de la bala
-    public float speed = 1.0f;
+    public float speed = 5.0f;
     //Start is called before the first frame update
     //Los codigos que aqui se comenzaran a cargar desde el primer frame
     void Start()
     {
-         
+        Destroy(this.gameObject, 5f);
     }
 
     //Los codigos que aqui se estaran ejecutando continuamente con cada Frame
@@ -31,6 +31,7 @@ public class Bala : MonoBehaviour
         if (Obj.CompareTag("Player"))
         {
             Debug.Log("Impacto con el jugador");
+            //Funciones de bajar vida al jugador
             Destroy(this.gameObject);
         }
     }
